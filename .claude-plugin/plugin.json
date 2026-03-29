@@ -1,0 +1,18 @@
+{
+  "name": "code-agent-plugin",
+  "description": "Development standards, deployment templates, server operations, and troubleshooting flows for Claude Code - eliminates repetitive project setup instructions",
+  "version": "0.1.0",
+  "author": {
+    "name": "CodeAgentPlugin"
+  },
+  "license": "MIT",
+  "keywords": [
+    "development-standards",
+    "deployment",
+    "server-ops",
+    "troubleshooting",
+    "project-init",
+    "logging",
+    "docker"
+  ]
+}
