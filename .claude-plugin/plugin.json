@@ -6,6 +6,7 @@
     "name": "CodeAgentPlugin"
   },
   "license": "MIT",
+  "skills": "./skills/",
   "keywords": [
     "development-standards",
     "deployment",
