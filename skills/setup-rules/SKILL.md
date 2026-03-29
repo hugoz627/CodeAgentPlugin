@@ -19,7 +19,7 @@ description: Use when joining an existing project that lacks development standar
    - 向用户确认识别结果
 
 3. **对比缺失项**：
-   - 读取 init-project skill 下的 `references/rules-common.md` 和对应语言的 `references/rules-{lang}.md`
+   - 读取本插件 `skills/init-project/references/rules-common.md` 和对应语言的 `skills/init-project/references/rules-{lang}.md`（使用 Read 工具，路径相对于插件安装目录）
    - 逐项检查已有规则文件中是否包含以下内容：
      - 中文注释 / 中文 commit / 英文 log 约定
      - 日志规范（文件落地、主流程日志、异常日志、请求 I/O 日志）

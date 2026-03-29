@@ -63,7 +63,7 @@ description: Use when you need to create or update troubleshooting procedures fo
 | 查某用户请求 | `grep 'userId={id}' {log_path}` |
 | 查某次请求链路 | `grep '{traceId}' {log_path}` |
 | 查最近错误 | `grep -iE 'error\|exception' {log_path} \| tail -50` |
-| 查某时间段日志 | `awk '/2024-01-15T10:00/,/2024-01-15T11:00/' {log_path}` |
+| 查某时间段日志 | `awk '/2025-01-15T10:00/,/2025-01-15T11:00/' {log_path}` |
 
 #### 3.4 服务器关联（如有 servers.yaml）
 

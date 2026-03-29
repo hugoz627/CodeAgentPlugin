@@ -32,8 +32,8 @@
 
 示例格式：
 ```
-2024-01-15T10:30:00.123Z [INFO] [UserService] [trace:abc123] User login success, userId=12345, ip=192.168.1.1, cost=45ms
-2024-01-15T10:30:01.456Z [ERROR] [OrderService] [trace:abc123] Create order failed, userId=12345, error=insufficient balance, amount=100.00
+2025-01-15T10:30:00.123Z [INFO] [UserService] [trace:abc123] User login success, userId=12345, ip=192.168.1.1, cost=45ms
+2025-01-15T10:30:01.456Z [ERROR] [OrderService] [trace:abc123] Create order failed, userId=12345, error=insufficient balance, amount=100.00
 ```
 
 ## 错误处理

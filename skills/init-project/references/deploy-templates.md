@@ -3,8 +3,6 @@
 ## docker-compose.yml 基础模板
 
 ```yaml
-version: '3.8'
-
 services:
   app:
     build: .

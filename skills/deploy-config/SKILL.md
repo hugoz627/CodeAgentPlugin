@@ -22,7 +22,7 @@ description: Use when setting up deployment for a project - generates Dockerfile
    - 可多选
 
 3. **生成配置文件**：
-   - 读取 init-project skill 下的 `references/dockerfile-templates.md` 和 `references/deploy-templates.md`
+   - 读取本插件 `skills/init-project/references/dockerfile-templates.md` 和 `skills/init-project/references/deploy-templates.md`（使用 Read 工具，路径相对于插件安装目录）
    - 根据检测到的语言选择对应模板
    - 针对项目实际情况调整模板中的占位符：
      - 端口号：询问用户或从代码中检测
