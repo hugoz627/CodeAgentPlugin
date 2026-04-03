@@ -1,19 +1,16 @@
 {
   "name": "code-agent-plugin",
-  "description": "Development standards, deployment templates, server operations, and troubleshooting flows for Claude Code - eliminates repetitive project setup instructions",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "将开发规范、部署模板、服务器运维知识沉淀为可复用的 skill，避免每次新项目重复告知 AI 相同约定",
   "author": {
-    "name": "CodeAgentPlugin"
+    "name": "hugoz627"
   },
+  "homepage": "https://github.com/hugoz627/CodeAgentPlugin",
+  "repository": "https://github.com/hugoz627/CodeAgentPlugin",
   "license": "MIT",
+  "keywords": ["skills", "devops", "init-project", "deploy", "code-review"],
   "skills": "./skills/",
-  "keywords": [
-    "development-standards",
-    "deployment",
-    "server-ops",
-    "troubleshooting",
-    "project-init",
-    "logging",
-    "docker"
-  ]
+  "commands": "./commands/",
+  "agents": "./agents/",
+  "hooks": "./hooks/hooks.json"
 }
