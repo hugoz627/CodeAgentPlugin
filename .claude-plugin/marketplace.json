@@ -1,0 +1,23 @@
+{
+  "name": "code-agent-plugin",
+  "owner": {
+    "name": "hugoz627"
+  },
+  "metadata": {
+    "description": "将开发规范、部署模板、服务器运维知识沉淀为可复用的 skill",
+    "homepage": "https://github.com/hugoz627/CodeAgentPlugin"
+  },
+  "plugins": [
+    {
+      "name": "code-agent-plugin",
+      "source": "./",
+      "description": "将开发规范、部署模板、服务器运维知识沉淀为可复用的 skill，避免每次新项目重复告知 AI 相同约定",
+      "version": "1.0.0",
+      "category": "development",
+      "tags": ["skills", "devops", "init-project", "deploy", "code-review"],
+      "homepage": "https://github.com/hugoz627/CodeAgentPlugin",
+      "repository": "https://github.com/hugoz627/CodeAgentPlugin",
+      "license": "MIT"
+    }
+  ]
+}
