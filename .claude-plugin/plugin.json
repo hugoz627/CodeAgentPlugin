@@ -9,8 +9,5 @@
   "repository": "https://github.com/hugoz627/CodeAgentPlugin",
   "license": "MIT",
   "keywords": ["skills", "devops", "init-project", "deploy", "code-review"],
-  "skills": "./skills/",
-  "commands": "./commands/",
-  "agents": "./agents/",
-  "hooks": "./hooks/hooks.json"
+  "skills": "./skills/"
 }
