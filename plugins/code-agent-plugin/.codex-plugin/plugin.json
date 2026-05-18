@@ -1,0 +1,40 @@
+{
+  "name": "code-agent-plugin",
+  "version": "1.0.0",
+  "description": "将开发规范、部署模板、服务器运维知识沉淀为可复用的 skill，避免每次新项目重复告知 AI 相同约定",
+  "author": {
+    "name": "hugoz627"
+  },
+  "homepage": "https://github.com/hugoz627/CodeAgentPlugin",
+  "repository": "https://github.com/hugoz627/CodeAgentPlugin",
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "devops",
+    "init-project",
+    "deploy",
+    "code-review"
+  ],
+  "skills": "./skills/",
+  "hooks": "./hooks.json",
+  "interface": {
+    "displayName": "Code Agent Plugin",
+    "shortDescription": "开发规范、部署与运维技能集",
+    "longDescription": "为 Codex 提供开发规范、部署模板、服务器运维、事故响应与代码审查等可复用技能。",
+    "developerName": "hugoz627",
+    "category": "Productivity",
+    "capabilities": [
+      "Write",
+      "Interactive"
+    ],
+    "websiteURL": "https://github.com/hugoz627/CodeAgentPlugin",
+    "privacyPolicyURL": "https://github.com/hugoz627/CodeAgentPlugin",
+    "termsOfServiceURL": "https://github.com/hugoz627/CodeAgentPlugin",
+    "defaultPrompt": [
+      "初始化一个新项目的开发规范。",
+      "生成部署配置和 CI/CD 模板。",
+      "做一次面向项目规范的代码审查。"
+    ],
+    "brandColor": "#2563EB"
+  }
+}

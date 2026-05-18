@@ -1,0 +1,20 @@
+{
+  "name": "code-agent-marketplace",
+  "interface": {
+    "displayName": "Code Agent Marketplace"
+  },
+  "plugins": [
+    {
+      "name": "code-agent-plugin",
+      "source": {
+        "source": "local",
+        "path": "./plugins/code-agent-plugin"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
