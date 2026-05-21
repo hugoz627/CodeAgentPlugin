@@ -1,6 +1,6 @@
 {
   "name": "code-agent-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "将开发规范、部署模板、服务器运维知识沉淀为可复用的 skill，避免每次新项目重复告知 AI 相同约定",
   "author": {
     "name": "hugoz627"
@@ -10,13 +10,14 @@
   "license": "MIT",
   "keywords": [
     "skills",
+    "commands",
     "devops",
     "init-project",
     "deploy",
     "code-review"
   ],
   "skills": "./skills/",
-  "hooks": "./hooks.json",
+  "hooks": "./hooks/hooks.json",
   "interface": {
     "displayName": "Code Agent Plugin",
     "shortDescription": "开发规范、部署与运维技能集",
