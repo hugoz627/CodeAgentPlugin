@@ -2,18 +2,18 @@
 
 ## 仓库定位
 
-- 本仓库不是只服务单一工具的插件仓库，而是一个“共享能力源 + 双平台分发外壳”工程。
+- 本仓库不是只服务单一工具的插件仓库，而是一个“共享能力源 + 双平台分发入口”工程。
 - 目标是让同一套能力同时服务 **Claude Code** 和 **Codex**，并尽量避免维护两份分叉逻辑。
 - 仓库中已有 `skills/`、插件元数据、marketplace 元数据等多层结构；后续扩展应尽量减少重复包装。
 
 ## 为什么会有 `plugins/` 目录
 
-- `plugins/` 目录是 **Codex marketplace 分发结构** 的一部分，不是误加的重复目录。
+- `plugins/` 目录是 **Codex repo-scoped marketplace 分发结构** 的一部分，不是误加的重复目录。
 - 当前仓库根下的 `.agents/plugins/marketplace.json` 把插件入口指向 `./plugins/code-agent-plugin`。
-- `plugins/code-agent-plugin/.codex-plugin/plugin.json` 是 Codex 插件清单；Codex 通过它识别可安装插件。
+- `plugins/code-agent-plugin/` 不是第二份源码，而是指向仓库根共享内容的薄包装层（symlink wrapper）。
 - 也就是说，这个仓库现在同时扮演两种角色：
   - 插件源码仓库
-  - 本地 marketplace 根目录
+  - 本地 repo marketplace 根目录
 - 结论：只要我们继续支持 Codex marketplace 安装，`plugins/` 目录就是合理且必要的。
 
 ## 哪些目录必须保留
@@ -23,14 +23,14 @@
 - `skills/`：仓库现有能力资产。
 - `.claude-plugin/`：Claude Code 的插件元数据入口。
 - `.agents/plugins/marketplace.json`：Codex marketplace 入口。
-- `plugins/code-agent-plugin/`：Codex 的插件分发目录。
+- `plugins/code-agent-plugin/`：Codex 的插件分发入口壳。
 
 可直接这样理解：
 
 - `skills/` = 仓库已有能力资产
 - `.claude-plugin/` = Claude 安装包装
 - `.agents/plugins/marketplace.json` = Codex 市场索引
-- `plugins/code-agent-plugin/` = Codex 安装包装
+- `plugins/code-agent-plugin/` = Codex 安装包装（symlink 到根目录真源）
 
 因此，不能只保留 `plugins/`；至少还要保留 `skills/` 与 `.agents/plugins/marketplace.json`，而如果还要支持 Claude，就还要保留 `.claude-plugin/`。
 
@@ -40,8 +40,8 @@
 - `commands/`：Claude 插件侧的 slash command 目录。
 - `.claude-plugin/`：Claude Code 侧的插件元数据与兼容包装。
 - `.agents/plugins/marketplace.json`：Codex 侧的 marketplace 清单。
-- `plugins/code-agent-plugin/`：Codex 插件分发目录。
-- `plugins/code-agent-plugin/commands/`：Codex 插件侧的 slash command 目录。
+- `plugins/code-agent-plugin/`：Codex 插件分发入口壳（symlink wrapper）。
+- `plugins/code-agent-plugin/commands/`：指向根目录 `commands/` 的 symlink。
 - `hooks/`：共享或平台可复用的 hook 资产。
 - `docs/`：设计、计划、演进说明。
 
@@ -60,9 +60,9 @@
 - Codex 官方已确认支持 custom slash commands；当前仓库按插件分发约定，在 Codex 插件根目录下使用 `commands/` 暴露命令包装。
 - 因此本仓库的实现约定是：
   - Claude 侧命令源放在仓库根 `commands/`
-  - Codex 侧命令源放在 `plugins/code-agent-plugin/commands/`
-  - 两边命令文件名保持一致
-  - 两边命令内容保持语义一致
+  - Codex 侧入口位于 `plugins/code-agent-plugin/commands/`
+  - 但它应直接指向根目录 `commands/`
+  - 不单独维护第二份命令内容
 
 ## 与 superpowers 流程对齐
 
@@ -80,6 +80,7 @@
 - **双目录同步**：新增命令时，必须同时检查：
   - `commands/`
   - `plugins/code-agent-plugin/commands/`
+- **优先 symlink / 薄包装**：Codex 入口层优先使用 symlink 或最薄包装，不要复制命令正文。
 - **同名对齐**：Claude 与 Codex 两侧尽量使用同名命令文件，避免后续映射混乱。
 - **前置元数据最小化**：命令 frontmatter 默认只放必要字段，至少包含 `description`。除非确有必要，不要堆叠宿主专属字段。
 - **默认上下文优先**：高频工作流命令默认应为零参数，直接基于当前 worktree、当前 diff、当前计划和当前任务上下文推进；只有确实缺信息时才向用户要最小必要补充。
