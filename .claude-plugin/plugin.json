@@ -8,6 +8,6 @@
   "homepage": "https://github.com/hugoz627/CodeAgentPlugin",
   "repository": "https://github.com/hugoz627/CodeAgentPlugin",
   "license": "MIT",
-  "keywords": ["skills", "commands", "devops", "init-project", "deploy", "code-review"],
+  "keywords": ["skills", "commands", "devops", "init-project", "deploy", "code-review", "goal"],
   "skills": "./skills/"
 }

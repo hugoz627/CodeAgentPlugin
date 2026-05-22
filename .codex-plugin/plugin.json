@@ -14,7 +14,8 @@
     "devops",
     "init-project",
     "deploy",
-    "code-review"
+    "code-review",
+    "goal"
   ],
   "skills": "./skills/",
   "hooks": "./hooks/hooks.json",
@@ -34,7 +35,8 @@
     "defaultPrompt": [
       "初始化一个新项目的开发规范。",
       "生成部署配置和 CI/CD 模板。",
-      "做一次面向项目规范的代码审查。"
+      "做一次面向项目规范的代码审查。",
+      "先收敛目标与验收条件，再生成最佳实践 /goal。"
     ],
     "brandColor": "#2563EB"
   }
