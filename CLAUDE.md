@@ -40,8 +40,9 @@
 - `commands/`：Claude 插件侧的 slash command 目录。
 - `.claude-plugin/`：Claude Code 侧的插件元数据与兼容包装。
 - `.agents/plugins/marketplace.json`：Codex 侧的 marketplace 清单。
-- `plugins/code-agent-plugin/`：Codex 插件分发入口壳（symlink wrapper）。
-- `plugins/code-agent-plugin/commands/`：指向根目录 `commands/` 的 symlink。
+- `plugins/code-agent-plugin/`：Codex 插件分发入口壳。
+- `plugins/code-agent-plugin/commands/`：插件内 command 镜像，保留工作流真源与兼容层。
+- `plugins/code-agent-plugin/skills/<workflow>/SKILL.md`：Codex 侧与 command 同名的 skill alias，供 skills-first 入口使用。
 - `hooks/`：共享或平台可复用的 hook 资产。
 - `docs/`：设计、计划、演进说明。
 
@@ -57,12 +58,12 @@
 - 这个仓库后续不仅要支持 plugin / marketplace 安装，还要支持一组可复用的 slash command。
 - 目标不是为两个工具各写一套独立命令逻辑，而是共享一套命令语义，并分别提供双平台入口。
 - Claude Code 官方支持插件根目录下的 `commands/` 作为插件命令目录；项目内命令则是 `.claude/commands/`。
-- Codex 官方已确认支持 custom slash commands；当前仓库按插件分发约定，在 Codex 插件根目录下使用 `commands/` 暴露命令包装。
+- 在当前验证环境 `codex-cli 0.133.0` 中，Codex 插件详情页不应被假定会展示 `commands/`，因此 Codex 侧高频 workflow 采用 skills-first。
 - 因此本仓库的实现约定是：
-  - Claude 侧命令源放在仓库根 `commands/`
-  - Codex 侧入口位于 `plugins/code-agent-plugin/commands/`
-  - 但它应直接指向根目录 `commands/`
-  - 不单独维护第二份命令内容
+  - 仓库根 `commands/` 是 deterministic workflow 的语义真源
+  - Claude 侧直接消费这些 commands
+  - Codex 侧为高频 workflow 提供同名 skill alias：`plugins/code-agent-plugin/skills/<workflow>/SKILL.md`
+  - 这些 alias 必须回读对应的 `commands/*.md`，不要维护第二套已经漂移的语义
 
 ## 与 superpowers 流程对齐
 
@@ -77,10 +78,10 @@
 新增或修改 slash command 时，遵守以下规则：
 
 - **直接表达命令意图**：command 文件直接描述要做什么、输入什么、输出什么，不要再额外套一层无意义包装。
-- **双目录同步**：新增命令时，必须同时检查：
+- **双入口同步**：新增高频 workflow 时，必须同时检查：
   - `commands/`
-  - `plugins/code-agent-plugin/commands/`
-- **优先 symlink / 薄包装**：Codex 入口层优先使用 symlink 或最薄包装，不要复制命令正文。
+  - `plugins/code-agent-plugin/skills/<workflow>/SKILL.md`
+- **薄包装优先**：Codex skill alias 只负责把入口导向对应 command 真源，不要复制第二份工作流正文。
 - **同名对齐**：Claude 与 Codex 两侧尽量使用同名命令文件，避免后续映射混乱。
 - **前置元数据最小化**：命令 frontmatter 默认只放必要字段，至少包含 `description`。除非确有必要，不要堆叠宿主专属字段。
 - **默认上下文优先**：高频工作流命令默认应为零参数，直接基于当前 worktree、当前 diff、当前计划和当前任务上下文推进；只有确实缺信息时才向用户要最小必要补充。
@@ -100,6 +101,15 @@
 - `cross-review`：零参数发起另一开发工具的独立复审并汇总结论
 - `stabilize-diff`：零参数对当前 diff 执行修复收敛循环
 
+对应的 Codex skills-first 入口应保持一一映射：
+
+- `@code-agent-plugin:review-complete`
+- `@code-agent-plugin:autopilot-plan`
+- `@code-agent-plugin:cross-tool-dispatch`
+- `@code-agent-plugin:bug-sweep`
+- `@code-agent-plugin:cross-review`
+- `@code-agent-plugin:stabilize-diff`
+
 ## 对新增命令的取舍
 
 - 不要为了暴露 skill 而新增一个“只是转发 skill”的空命令。
@@ -117,8 +127,9 @@
   - `.agents/plugins/marketplace.json`
   - `plugins/code-agent-plugin/.codex-plugin/plugin.json`
   - `plugins/code-agent-plugin/commands/`
+  - `plugins/code-agent-plugin/skills/<workflow>/SKILL.md`
 - 若后续增加新的平台包装层，也继续遵守“共享语义一份，平台入口分离”的原则。
 
 ## 备注
 
-- 以上关于 Codex plugin / marketplace 目录结构、Claude 插件命令目录，以及 Codex 自定义 slash command 支持边界，已在 2026-05-17 结合官方文档与本地已安装插件样例核验。
+- 以上关于 Codex plugin / marketplace 目录结构、Claude 插件命令目录，以及 Codex 侧 commands/ 与 skills 的可见性边界，已在 2026-05-24 结合官方文档、`codex-cli 0.133.0` 与本地已安装插件样例核验。
