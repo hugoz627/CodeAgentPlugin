@@ -1,6 +1,6 @@
 {
   "name": "code-agent-plugin",
-  "version": "1.0.2+codex.20260524214438",
+  "version": "1.0.3",
   "description": "\u5c06\u5f00\u53d1\u89c4\u8303\u3001\u90e8\u7f72\u6a21\u677f\u3001\u670d\u52a1\u5668\u8fd0\u7ef4\u77e5\u8bc6\u6c89\u6dc0\u4e3a\u53ef\u590d\u7528\u7684 skill\uff0c\u907f\u514d\u6bcf\u6b21\u65b0\u9879\u76ee\u91cd\u590d\u544a\u77e5 AI \u76f8\u540c\u7ea6\u5b9a",
   "author": {
     "name": "hugoz627"
